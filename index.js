@@ -22,7 +22,7 @@ exports.init = function(config) {
     config.lesscPath = config.lesscPath || __dirname + "/node_modules/less/bin/lessc";
 
     for(var i in config) {
-        if(i != "destination" && i != "watchForChanges" && !fs.existsSync(config[i])) {
+        if(i != "silentOutput" && i != "destination" && i != "watchForChanges" && !fs.existsSync(config[i])) {
             throw new Error("Path doesn't exist (" + config[i] + ")");
         }
     }
@@ -30,6 +30,11 @@ exports.init = function(config) {
     if(typeof config.watchForChanges === "undefined") {
         config.watchForChanges = true;
     }
+
+	if(typeof config.watchForChanges === "undefined") {
+        config.watchForChanges = true;
+    }
+
 
     if(config.watchForChanges) {
         var watch = {
@@ -57,7 +62,7 @@ exports.init = function(config) {
 };
 
 exports.compile = function(config) {
-    var result = shell.exec("node " + config.lesscPath + ' ' + config.fileToCompile, {silent: true});            
+    var result = shell.exec("node " + config.lesscPath + ' ' + config.fileToCompile, {silent: config.silentOutput});            
     if(result.code === 0) {
         fs.writeFile(config.destination, result.output, function(err) {
             if(err) {

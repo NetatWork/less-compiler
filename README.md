@@ -47,4 +47,14 @@ If you need to know when the compiler started to watch:
         console.log("I'm ready ...");
     });
 
+If you want to output error messages:
+
+    require("lesscompile").init({
+        pathToWatch: __dirname + "/less",
+        fileToCompile: __dirname + "/less/main.less",
+        destination: __dirname + "/compiled/styles.css"
+    	silentOutput: false;
+	});
+
+
 The usage of absolute paths is recommended.
