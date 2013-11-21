@@ -31,8 +31,8 @@ exports.init = function(config) {
         config.watchForChanges = true;
     }
 
-	if(typeof config.watchForChanges === "undefined") {
-        config.watchForChanges = true;
+	if(typeof config.silentOutput === "undefined") {
+        config.silentOutput = true;
     }
 
 
