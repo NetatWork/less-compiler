@@ -19,9 +19,12 @@ exports.init = function(config) {
 
     if(!config) throw new Error("Please provide configuration.");
 
-    config.lesscPath = config.lesscPath || __dirname + "/node_modules/less/bin/lessc";
+    //config.lesscPath = config.lesscPath || __dirname + "/node_modules/less/bin/lessc";
+    config.lesscPath = "node_modules/less/bin/lessc";
+	
 
     for(var i in config) {
+		console.log('CONF = ' + config[i]);
         if(i != "silentOutput" && i != "destination" && i != "watchForChanges" && !fs.existsSync(config[i])) {
             throw new Error("Path doesn't exist (" + config[i] + ")");
         }
